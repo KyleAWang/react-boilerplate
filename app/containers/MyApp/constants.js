@@ -9,10 +9,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
-export const DEFAULT_LOCALE = 'en';
 
-
-export const LOAD_ORDERS = 'kyle/App/LOAD_ORDERS';
+export const LOAD_ORDERS = 'boilerplate/MyApp/LOAD_ORDERS';
+export const LOAD_ORDERS_SUCCESS = 'boilerplate/MyApp/LOAD_ORDERS_SUCCESS';
+export const LOAD_ORDERS_ERROR = 'boilerplate/MyApp/LOAD_ORDERS_ERROR';
