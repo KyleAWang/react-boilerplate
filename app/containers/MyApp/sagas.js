@@ -2,15 +2,16 @@ import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { LOAD_ORDERS } from './constants';
 import { loadOrders, loadOrdersSuccess, loadOrdersError } from './actions';
+import {makeSelectOrders} from './selectors';
 
 import request from 'utils/request';
 
 export function* getOrders() {
-  const requestURL = `http://localhost:3000/graphql?query={viewer{orderId,totalCost,updated}}`;
+  const requestURL = `http://localhost:3000/graphql?query={orders{orderId,totalCost,updated}}`;
 
   try{
     const orders = yield call(request, requestURL);
-    yield put(loadOrdersSuccess(orders))
+    yield put(loadOrdersSuccess(orders.data.viewer))
   }catch (err){
     yield put(loadOrdersError(err));
   }
@@ -23,7 +24,7 @@ export function* ordersData() {
   yield cancel(watcher);
 }
 
-export default {
-  ordersData
-}
+export default [
+  ordersData,
+]
 

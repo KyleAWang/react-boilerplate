@@ -16,11 +16,16 @@ module.exports.getOrders = () => {
     return promise;
 };
 
+module.exports.getOrder = (root, {orderId}) => {
+  let promise = OrderDB.findOne({  'orderId': orderId }).exec();
+  return promise;
+};
+
 module.exports.getViewer = () => {
     let promise = OrderDB.find().select().exec();
     promise.then((orders) => {
 
-        console.log(orders);
+        // console.log(orders);
     });
     return promise;
 };

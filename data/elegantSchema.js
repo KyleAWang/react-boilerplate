@@ -24,7 +24,8 @@ const {
 const RootQuery = new GraphQLObjectType({
     name: 'Root',
     fields: {
-        viewer: OrderQueries.viewer,
+        orders: OrderQueries.orders,
+        order: OrderQueries.order,
     }
 });
 

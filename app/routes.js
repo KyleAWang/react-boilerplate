@@ -2,7 +2,7 @@
 // They are all wrapped in the App component, which should contain the navbar etc
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
-import { getAsyncInjectors } from './utils/asyncInjectors';
+import {getAsyncInjectors} from './utils/asyncInjectors';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -14,7 +14,7 @@ const loadModule = (cb) => (componentModule) => {
 
 export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
-  const { injectReducer, injectSagas } = getAsyncInjectors(store);
+  const {injectReducer, injectSagas} = getAsyncInjectors(store);
 
   return [
     {
@@ -22,10 +22,14 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/HomePage/reducer'),
-          import('containers/HomePage/sagas'),
-          import('containers/HomePage'),
-        ]);
+        import
+        ('containers/HomePage/reducer'),
+        import
+        ('containers/HomePage/sagas'),
+        import
+        ('containers/HomePage'),
+      ])
+        ;
 
         const renderRoute = loadModule(cb);
 
@@ -42,7 +46,8 @@ export default function createRoutes(store) {
       path: '/features',
       name: 'features',
       getComponent(nextState, cb) {
-        import('containers/FeaturePage')
+        import
+        ('containers/FeaturePage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
@@ -51,15 +56,18 @@ export default function createRoutes(store) {
       name: 'myapp',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/MyApp/reducer'),
-          import('containers/MyApp/sagas'),
-          import('containers/MyApp/')
-        ]);
+        import
+        ('containers/MyApp/reducer'),
+        import
+        ('containers/MyApp/sagas'),
+        import
+        ('containers/MyApp/')
+      ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('order', reducer.default);
+          injectReducer('orders', reducer.default);
           injectSagas(sagas.default);
 
           renderRoute(component)
@@ -68,10 +76,23 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/(:order_id)',
+      name: 'order detail',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+
+      }
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
+        import
+        ('containers/NotFoundPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

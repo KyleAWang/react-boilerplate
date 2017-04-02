@@ -1,6 +1,10 @@
 import { createSelector } from 'reselect';
 
-const selectMyApp = (state) => state.get('order');
+
+console.log('start selectors');
+
+const selectMyApp = (state) => state.get('orders');
+
 
 const makeSelectOrders = () => createSelector(
   selectMyApp,

@@ -4,23 +4,28 @@ import { connect } from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {loadOrders} from './actions';
 import {makeSelectLoading, makeSelectError} from 'containers/App/selectors';
-import {makeSelectOrders} from  './selectors';
 import { createStructuredSelector } from 'reselect';
+import { makeSelectOrders } from './selectors';
 
 
 export class MyApp extends React.Component {
 
 
   renderOrders(){
+    if (!this.props.orders){
+      return;
+    }
+    console.log(this.props.orders);
     return this.props.orders.map(order => {
       return (
-        <div>{order.orderId}, {order.totalCost}, {order.updated}</div>
+        <div key={order.orderId}>{order.orderId}, {order.totalCost}, {order.updated}</div>
       )
     })
   }
 
   render() {
 
+    console.log('my app index');
     const {loading, error, orders} = this.props;
 
     return (
@@ -31,7 +36,7 @@ export class MyApp extends React.Component {
                 ]}
         />
         <h1>Hello my app</h1>
-        <button onClick={this.props.onLoadOrders}></button>
+        <button onClick={this.props.onLoadOrders}> hit me </button>
         <div>
           {this.renderOrders()}
         </div>
@@ -66,4 +71,4 @@ const mapStateToProps = createStructuredSelector({
   error: makeSelectError(),
 });
 
-export default connect(mapDispatchToProps, makeSelectOrders)(MyApp);
+export default connect(mapStateToProps, mapDispatchToProps)(MyApp);
