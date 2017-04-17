@@ -7,6 +7,7 @@ const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const logger = require('../../server/logger');
 const cheerio = require('cheerio');
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
@@ -23,6 +24,7 @@ const plugins = [
     exclude: /a\.js|node_modules/, // exclude node_modules
     failOnError: false, // show a warning when there is a circular dependency
   }),
+  new DashboardPlugin(),
 ];
 
 module.exports = require('./webpack.base.babel')({
@@ -107,7 +109,7 @@ function dependencyHandlers() {
   }
 
   // If DLLs are explicitly defined, we automatically create a DLLReferencePlugin for each of them.
-    const dllManifests = Object.keys(dllPlugin.dlls).map((name) => path.join(dllPath, `/${name}.json`));
+  const dllManifests = Object.keys(dllPlugin.dlls).map((name) => path.join(dllPath, `/${name}.json`));
 
   return dllManifests.map((manifestPath) => {
     if (!fs.existsSync(path)) {

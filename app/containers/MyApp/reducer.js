@@ -1,10 +1,10 @@
-import {fromJS} from 'immutable';
-import {LOAD_ORDERS, LOAD_ORDERS_SUCCESS, LOAD_ORDERS_ERROR} from './constants';
+import { fromJS } from 'immutable';
+import { LOAD_ORDERS, LOAD_ORDERS_SUCCESS, LOAD_ORDERS_ERROR } from './constants';
 
 const initialState = fromJS({
   loading: false,
   error: false,
-  orders: false
+  orders: false,
 });
 
 function orderReducer(state = initialState, action) {

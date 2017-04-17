@@ -1,51 +1,54 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import {FormattedMessage} from 'react-intl';
-import {loadOrders} from './actions';
-import {makeSelectLoading, makeSelectError} from 'containers/App/selectors';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router';
+import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import { loadOrders } from './actions';
 import { makeSelectOrders } from './selectors';
+import OrdersList from 'components/OrderList';
 
 
 export class MyApp extends React.Component {
-
-
-  renderOrders(){
-    if (!this.props.orders){
-      return;
-    }
-    console.log(this.props.orders);
-    return this.props.orders.map(order => {
-      return (
-        <div key={order.orderId}>{order.orderId}, {order.totalCost}, {order.updated}</div>
-      )
-    })
+  componentDidMount() {
+    this.props.onLoadOrders();
   }
 
-  render() {
+  // renderOrders() {
+  //   if (this.props.orders) {
+  //     return this.props.orders.map((order) => <div key={order.orderId}><Link to={`/order/${order.orderId}`}>
+  //       {order.orderId}</Link>, {order.totalCost}, {order.updated}</div>);
+  //   }
+  //   return '';
+  // }
 
-    console.log('my app index');
-    const {loading, error, orders} = this.props;
+  render() {
+    const { loading, error, orders } = this.props;
+    const orderListProps = {
+      loading,
+      orders,
+      error,
+    };
 
     return (
       <div>
-        <Helmet title="Personal App"
-                meta={[
-                  {name: 'description', content: 'Pesonal Application'}
-                ]}
+        <Helmet
+          title="Personal App"
+          meta={[
+            { name: 'description', content: 'Pesonal Application' },
+          ]}
         />
         <h1>Hello my app</h1>
-        <button onClick={this.props.onLoadOrders}> hit me </button>
         <div>
-          {this.renderOrders()}
+          {/*{this.renderOrders()}*/}
+          <OrdersList {...orderListProps} />
         </div>
       </div>
     );
   }
 }
 
-MyApp.propType = {
+MyApp.propTypes = {
   loading: React.PropTypes.bool,
   error: React.PropTypes.oneOfType([
     React.PropTypes.object,
@@ -55,13 +58,13 @@ MyApp.propType = {
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
-  onLoadOrders: React.PropTypes.func
+  onLoadOrders: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadOrders: () => dispatch(loadOrders())
-  }
+    onLoadOrders: () => dispatch(loadOrders()),
+  };
 }
 
 

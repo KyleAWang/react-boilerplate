@@ -1,8 +1,14 @@
-/**
- * Created by Kyle on 4/2/2017.
- */
-(function () {
-    'use strict';
+import { createSelector } from 'reselect';
 
-}());
- 
+const selectOrder = (state) => state.get('order');
+
+const makeSelectOrder = () => createSelector(
+  selectOrder,
+  (orderState) => orderState.get('order'),
+);
+
+export {
+  selectOrder,
+  makeSelectOrder,
+};
+

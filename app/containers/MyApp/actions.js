@@ -1,26 +1,26 @@
-
 import {
   LOAD_ORDERS,
   LOAD_ORDERS_ERROR,
-  LOAD_ORDERS_SUCCESS
+  LOAD_ORDERS_SUCCESS,
 } from './constants';
 
 export function loadOrders() {
   return {
-    type: LOAD_ORDERS
+    type: LOAD_ORDERS,
   };
-};
+}
+
 
 export function loadOrdersSuccess(orders) {
-  return{
+  return {
     type: LOAD_ORDERS_SUCCESS,
-    orders
+    orders,
   };
-};
+}
 
 export function loadOrdersError(error) {
-  return{
+  return {
     type: LOAD_ORDERS_ERROR,
-    error
+    error,
   };
-};
+}

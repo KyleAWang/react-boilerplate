@@ -1,0 +1,25 @@
+exports[`getOrder Saga should call the loadOrderDetailError action if the response errors 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "http://localhost:3000/graphql?query={order(orderId:\"333\"){orderId,totalCost,updated}}",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`getOrder Saga should dispatch the loadOrderDetailSuccess action if it requests the data successfully 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "http://localhost:3000/graphql?query={order(orderId:\"333\"){orderId,totalCost,updated}}",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;

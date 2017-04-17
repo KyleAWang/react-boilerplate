@@ -89,8 +89,8 @@ module.exports = (options) => ({
       'main',
     ],
     alias: {
-      graphql:  path.resolve('./node_modules/graphql')
-    }
+      graphql: path.resolve('./node_modules/graphql'),
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
